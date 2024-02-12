@@ -1,5 +1,5 @@
 provider "random" {
-  version = "~> 3.0"
+  version = "~> 3.1"
 }
 
 resource "random_pet" "name" {
@@ -7,7 +7,7 @@ resource "random_pet" "name" {
     # Updating this value causes Terraform to generate a new name
     uuid = "1"
   }
-  length = 2
+  length = 3
   prefix = "cloud"
   separator = "-"
 }
