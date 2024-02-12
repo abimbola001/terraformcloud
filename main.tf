@@ -7,10 +7,11 @@ resource "random_pet" "name" {
     # Updating this value causes Terraform to generate a new name
     uuid = "1"
   }
-  length = 3
+  length = 5
   prefix = "cloud"
   separator = "-"
 }
+
 
 output "pet_name" {
   description = "The random pet name"
