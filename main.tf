@@ -1,22 +1,19 @@
-# The following example shows how to generate a unique pet name
-# for an AWS EC2 instance that changes each time a new AMI id is
-# selected.
+provider "random" {
+  version = "~> 3.0"
+}
 
-resource "random_pet" "server" {
+resource "random_pet" "name" {
   keepers = {
-    # Generate a new pet name each time we switch to a new AMI id
-    #ami_id = var.ami_id
+    # Updating this value causes Terraform to generate a new name
+    uuid = "1"
   }
+  length = 2
+  prefix = "cloud"
+  separator = "-"
 }
 
-resource "aws_instance" "server" {
-  tags = {
-    Name = "web-server-${random_pet.server.id}"
-  }
-
-  # Read the AMI id "through" the random_pet resource to ensure that
-  # both will change together.
-  ami = random_pet.server.keepers.ami_id
-
-  # ... (other aws_instance arguments) ...
+output "pet_name" {
+  description = "The random pet name"
+  value       = random_pet.name.id
 }
+
